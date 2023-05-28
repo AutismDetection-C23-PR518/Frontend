@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AutisDetection</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="intro_get_started">Get Started</string>
+    <string name="intro_next">Next</string>
+    <string name="intro_skip">SKIP</string>
 </resources>
