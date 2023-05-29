@@ -1,7 +1,8 @@
-package com.dicoding.autisdetection
+package com.dicoding.autisdetection.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.dicoding.autisdetection.R
 import com.dicoding.autisdetection.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

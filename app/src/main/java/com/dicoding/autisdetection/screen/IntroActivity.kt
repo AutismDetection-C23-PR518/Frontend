@@ -1,6 +1,6 @@
 package com.dicoding.autisdetection.screen
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.dicoding.autisdetection.R
+import com.dicoding.autisdetection.auth.LoginActivity
 import com.dicoding.autisdetection.databinding.ActivityIntroBinding
 import com.dicoding.autisdetection.databinding.IntroAppDesignBinding
 import com.dicoding.autisdetection.screen.IntroActivity.Companion.MAX_STEP
@@ -66,25 +67,30 @@ class IntroActivity : Fragment() {
 
         //............................................................
         binding.btnNext.setOnClickListener {
-            if(binding.btnNext.text.toString()==getString(R.string.intro_get_started)){
+            if (binding.btnNext.text.toString() == getString(R.string.intro_get_started)) {
                 findNavController().navigateUp()
-            }
-            else{
+                val intent = Intent(requireContext(), LoginActivity::class.java)
+                startActivity(intent)
+
+            } else {
                 // to change current page - on click "Next BUTTON"
                 val current = (binding.viewPager2.currentItem) + 1
                 binding.viewPager2.currentItem = current
 
                 // to update button text
-                if(current>= MAX_STEP -1){
-                    binding.btnNext.text                =   getString(R.string.intro_get_started)//"Get Started"
-                    binding.btnNext.contentDescription  =   getString(R.string.intro_get_started)//"Get Started"
-
-                }else{
-                    binding.btnNext.text                =   getString(R.string.intro_next)//"Next"
-                    binding.btnNext.contentDescription  =   getString(R.string.intro_next)//"Next"
+                if (current >= MAX_STEP - 1) {
+                    binding.btnNext.text = getString(R.string.intro_get_started) //"Get Started"
+                    binding.btnNext.contentDescription = getString(R.string.intro_get_started) //"Get Started"
+                } else {
+                    binding.btnNext.text = getString(R.string.intro_next) //"Next"
+                    binding.btnNext.contentDescription = getString(R.string.intro_next) //"Next"
                 }
             }
         }
+
+
+
+
     }
     companion object {
         const val MAX_STEP = 3
