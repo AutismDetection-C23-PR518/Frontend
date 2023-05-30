@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.dicoding.autisdetection.databinding.ActivityLoginBinding
 import com.dicoding.autisdetection.setting.SharedPreference
 import com.dicoding.autisdetection.setting.ViewModelFactory
-import com.dicoding.autisdetection.view.MainActivity
+import com.dicoding.autisdetection.view.main.MainActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class LoginActivity : AppCompatActivity() {

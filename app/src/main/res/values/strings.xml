@@ -4,4 +4,8 @@
     <string name="intro_get_started">Get Started</string>
     <string name="intro_next">Next</string>
     <string name="intro_skip">SKIP</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

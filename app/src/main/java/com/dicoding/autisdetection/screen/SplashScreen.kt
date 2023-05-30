@@ -10,14 +10,12 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.lifecycleScope
-import com.dicoding.autisdetection.auth.LoginActivity
 import com.dicoding.autisdetection.databinding.ActivitySplashScreenBinding
 import com.dicoding.autisdetection.setting.SharedPreference
-import com.dicoding.autisdetection.view.MainActivity
-import kotlinx.coroutines.Dispatchers
+import com.dicoding.autisdetection.view.main.HomeActivity
+import com.dicoding.autisdetection.view.main.MainActivity
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class SplashScreen : AppCompatActivity() {
 
@@ -42,7 +40,7 @@ class SplashScreen : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
-                    val intent = Intent(this@SplashScreen, MainActivity::class.java)
+                    val intent = Intent(this@SplashScreen, HomeActivity::class.java)
                     startActivity(intent)
                     finish()
                 }
