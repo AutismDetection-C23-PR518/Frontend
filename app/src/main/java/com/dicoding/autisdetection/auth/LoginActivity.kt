@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.dicoding.autisdetection.databinding.ActivityLoginBinding
 import com.dicoding.autisdetection.setting.SharedPreference
 import com.dicoding.autisdetection.setting.ViewModelFactory
+import com.dicoding.autisdetection.view.main.HomeActivity
 import com.dicoding.autisdetection.view.main.MainActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -28,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this, ViewModelFactory(SharedPreference.getInstance(dataStore), this))[LoginViewModel::class.java]
 
+        supportActionBar?.hide()
 
         binding.btnSignUp.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
@@ -67,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel.isLogged.observe(this) { isLogged ->
             if (isLogged) {
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, HomeActivity::class.java))
                 finish()
             } else {
                 binding.loading.visibility = View.GONE

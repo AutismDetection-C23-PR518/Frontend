@@ -25,7 +25,10 @@ class OnboardingActivity : AppCompatActivity() {
         binding = ActivityOnboardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
+//        setSupportActionBar(binding.toolbar)
+
+
+        supportActionBar?.hide()
 
         val navHostFragment = supportFragmentManager.findFragmentById(binding.container.navHostFragmentContainer.id) as NavHostFragment? ?: return
         navController = navHostFragment.navController

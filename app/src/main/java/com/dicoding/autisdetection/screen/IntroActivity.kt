@@ -71,6 +71,7 @@ class IntroActivity : Fragment() {
                 findNavController().navigateUp()
                 val intent = Intent(requireContext(), LoginActivity::class.java)
                 startActivity(intent)
+                requireActivity().finish()
 
             } else {
                 // to change current page - on click "Next BUTTON"

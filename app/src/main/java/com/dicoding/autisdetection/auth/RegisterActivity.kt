@@ -29,7 +29,7 @@ class RegisterActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this, ViewModelFactory(SharedPreference.getInstance(dataStore), this))[RegisterViewModel::class.java]
 
-
+        supportActionBar?.hide()
         binding.btnSignUp.setOnClickListener {
             val name = binding.etName.text.toString().trim()
             val username = binding.etUsername.text.toString().trim()
