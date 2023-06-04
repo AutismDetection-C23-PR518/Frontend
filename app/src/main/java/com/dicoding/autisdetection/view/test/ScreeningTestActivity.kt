@@ -74,7 +74,7 @@ class ScreeningTestActivity : AppCompatActivity() {
 
         // Show the total score
         val totalScoreInt = totalScore.toInt() // Assuming the total score ranges from 0 to 10
-        binding.skorTextview.text = "Skor: $totalScoreInt"
+        binding.skor.text = "Total Your Skor: $totalScoreInt"
         Log.d("Result", "Result: $totalScoreInt")
 
         setQuestion()
@@ -84,6 +84,7 @@ class ScreeningTestActivity : AppCompatActivity() {
             if (answer != null) {
                 answers.add(answer)
                 setQuestion()
+                binding.progress.progress = answers.size
             } else {
                 Toast.makeText(this, "Please select an answer", Toast.LENGTH_SHORT).show()
             }
@@ -100,6 +101,9 @@ class ScreeningTestActivity : AppCompatActivity() {
         binding.answerRadiogroup.setOnCheckedChangeListener { _, _ ->
             binding.nextButton.isEnabled = true
         }
+
+        binding.progress.max = questions.size
+
 
     }
 
@@ -181,11 +185,12 @@ class ScreeningTestActivity : AppCompatActivity() {
         } else {
             "Your child is not at risk of autism"
         }
+        binding.detectionResult.text = resultText
         Toast.makeText(this, resultText, Toast.LENGTH_LONG).show()
 
         // Show the total score
         val totalScore = (result * 10).toInt() // Assuming the total score ranges from 0 to 10
-        binding.skorTextview.text = "Skor: $totalScore"
+        binding.skor.text = "Total Your Skor: $totalScore / 10"
         Log.d("Result", "Result: $result")
 
         // Hide the question and "Next" button
@@ -194,7 +199,10 @@ class ScreeningTestActivity : AppCompatActivity() {
         binding.nextButton.visibility = View.GONE
 
         // Show the total score and "Submit" button
+        binding.skor.visibility = View.VISIBLE
+        binding.submitButton.visibility = View.VISIBLE
         binding.skorTextview.visibility = View.VISIBLE
-//        binding.submitButton.visibility = View.VISIBLE
+        binding.detectionResult.visibility = View.VISIBLE
+        binding.progress.visibility = View.GONE
     }
 }
