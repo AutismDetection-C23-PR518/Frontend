@@ -32,6 +32,29 @@ class ScreeningTestActivity : AppCompatActivity() {
         "Does your child stare at nothing with no apparent purpose?"
     )
 
+    private val answerOptions: List<List<String>> = listOf(
+        // Jawaban untuk pertanyaan 1
+        listOf("Always", "Usually", "Sometimes", "Rarely", "Never"),
+        // Jawaban untuk pertanyaan 2
+        listOf("Very easy", "Quite easy", "Quite difficult", "Very difficult", "Impossible"),
+        // Jawaban untuk pertanyaan 3
+        listOf("Many Times a day", "A few times a day", "A few times a week", "Less than once a week", "Never"),
+        // Jawaban untuk pertanyaan 4
+        listOf("Many Times a day", "A few times a day", "A few times a week", "Less than once a week", "Never"),
+        // Jawaban untuk pertanyaan 5
+        listOf("Many Times a day", "A few times a day", "A few times a week", "Less than once a week", "Never"),
+        // Jawaban untuk pertanyaan 6
+        listOf("Many Times a day", "A few times a day", "A few times a week", "Less than once a week", "Never"),
+        // Jawaban untuk pertanyaan 7
+        listOf("Always", "Usually", "Sometimes", "Rarely", "Never"),
+        // Jawaban untuk pertanyaan 8
+        listOf("Very typical", "Quite typical", "Slightly unusual", "Very unusual", "My child doesn't speak"),
+        // Jawaban untuk pertanyaan 9
+        listOf("Many Times a day", "A few times a day", "A few times a week", "Less than once a week", "Never"),
+        // Jawaban untuk pertanyaan 10
+        listOf("Many Times a day", "A few times a day", "A few times a week", "Less than once a week", "Never"),
+    )
+
     private val answers: MutableList<String> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,6 +107,11 @@ class ScreeningTestActivity : AppCompatActivity() {
         val currentQuestionIndex = answers.size
         if (currentQuestionIndex < questions.size) {
             binding.questionTextview.text = questions[currentQuestionIndex]
+            binding.answer1Radiobutton.text = answerOptions[currentQuestionIndex][0]
+            binding.answer2Radiobutton.text = answerOptions[currentQuestionIndex][1]
+            binding.answer3Radiobutton.text = answerOptions[currentQuestionIndex][2]
+            binding.answer4Radiobutton.text = answerOptions[currentQuestionIndex][3]
+            binding.answer5Radiobutton.text = answerOptions[currentQuestionIndex][4]
             binding.answerRadiogroup.clearCheck()
             binding.nextButton.isEnabled = false
         } else {
