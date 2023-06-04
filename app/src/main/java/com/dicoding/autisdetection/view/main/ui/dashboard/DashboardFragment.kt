@@ -1,5 +1,6 @@
 package com.dicoding.autisdetection.view.main.ui.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.autisdetection.databinding.FragmentDashboardBinding
+import com.dicoding.autisdetection.view.test.ScreeningTestActivity
 
 class DashboardFragment : Fragment() {
 
@@ -28,10 +30,15 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+
+
+
+        binding.start.setOnClickListener {
+            startActivity(Intent(activity, ScreeningTestActivity::class.java))
         }
+
+
+
         return root
     }
 

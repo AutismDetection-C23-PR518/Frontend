@@ -16,7 +16,7 @@ interface ApiService {
     fun login(@Body loginRequest: LoginRequest): Call<LoginResponses>
 
 
-    @GET("getallpost")
+    @GET("allpost")
     fun getAllPost(
         @Header("Authorization") token: String
     ): Call<List<StoryResponses>>

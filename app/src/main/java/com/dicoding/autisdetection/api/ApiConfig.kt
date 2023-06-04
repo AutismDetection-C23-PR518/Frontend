@@ -6,7 +6,7 @@ class ApiConfig {
 
     companion object {
 
-        private const val BASE_URL = "http://192.168.100.66:8081/api/v1/"
+        private const val BASE_URL = "http://192.168.100.66:9000/api/v1/"
 
         fun getApiService(): ApiService {
             val loggingInterceptor = if (BuildConfig.DEBUG) {

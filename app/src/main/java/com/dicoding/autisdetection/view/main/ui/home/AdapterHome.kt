@@ -15,9 +15,9 @@ class AdapterHome(private val stories: List<StoryResponses>) :
 
         fun bind(story: StoryResponses) {
             // Bind data to views
-            binding.story.text = story.stori
-            binding.date.text = Constanta.convertDbDateToDisplayDate(story.created_at)
-            // Bind other views if needed
+            binding.story.text = story.post
+            binding.date.text = Constanta.convertDbDateToDisplayDate(story.createdAt)
+            binding.titleText.text = story.user?.name
         }
     }
 
