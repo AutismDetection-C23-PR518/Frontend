@@ -43,12 +43,12 @@ class NotificationsFragment : Fragment() {
         val root: View = binding.root
 
 
-        binding.btnLogout.setOnClickListener {
-            viewModel.logout()
-            requireActivity().startActivity(Intent(requireContext(), LoginActivity::class.java))
-            requireActivity().finish()
-            true
-        }
+//        binding.btnLogout.setOnClickListener {
+//            viewModel.logout()
+//            requireActivity().startActivity(Intent(requireContext(), LoginActivity::class.java))
+//            requireActivity().finish()
+//            true
+//        }
 
 
 

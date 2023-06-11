@@ -181,12 +181,12 @@ class ScreeningTestActivity : AppCompatActivity() {
 
         // Show the result as a toast message
         val resultText = if (result >= 0.5f) {
-            "Your child is at risk of autis"
+            "Hasil skor tes menunjukkan bahwa terdapat ciri-ciri potensi ASD (Autistic Spectrum Disorder) pada anak Anda. Disarankan untuk berkonsultasi dengan dokter spesialis anak guna penanganan lebih lanjut.\n"
         } else {
-            "Your child is not at risk of autism"
+            "Hasil skor tes menunjukkan bahwa tidak terdapat ciri-ciri potensi ASD (Autistic Spectrum Disorder) pada anak Anda."
         }
         binding.detectionResult.text = resultText
-        Toast.makeText(this, resultText, Toast.LENGTH_LONG).show()
+//        Toast.makeText(this, resultText, Toast.LENGTH_LONG).show()
 
         // Show the total score
         val totalScore = (result * 10).toInt() // Assuming the total score ranges from 0 to 10

@@ -22,4 +22,8 @@
     <style name="Theme.AutisDetection.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.AutisDetection.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="tabLayout" parent="ThemeOverlay.MaterialComponents.Dark">
+        <item name="tabSelectedTextColor">@color/black</item>
+        <item name="tabTextColor">@color/black</item>
+    </style>
 </resources>
