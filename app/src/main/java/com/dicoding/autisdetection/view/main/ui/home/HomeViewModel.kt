@@ -33,8 +33,9 @@ class HomeViewModel(private val sharedPreferences: SharedPreference) : ViewModel
                     ) {
                         _isLoading.value = false
                         if (response.isSuccessful) {
-                            dataStory.value = response.body()
-                            Log.d("HomeViewModel", "onResponse: ${response.body()}")
+                            val sortedStories = response.body()?.sortedByDescending { it.createdAt }
+                            dataStory.value = sortedStories as List<StoryResponses>
+                            Log.d("HomeViewModel", "onResponse: $sortedStories")
                         } else {
                             Log.d(
                                 "HomeViewModel",
@@ -53,4 +54,5 @@ class HomeViewModel(private val sharedPreferences: SharedPreference) : ViewModel
                 })
         }
     }
+
 }

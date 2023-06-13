@@ -1,17 +1,23 @@
 package com.dicoding.autisdetection.view.main.ui.home
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.autisdetection.databinding.FragmentHomeBinding
 import com.dicoding.autisdetection.setting.SharedPreference
@@ -49,9 +55,12 @@ class HomeFragment : Fragment() {
         viewModel.getStories()
 
         viewModel.story.observe(viewLifecycleOwner) { stories ->
-            adapter = AdapterHome(stories)
+            val sortedStories = stories.sortedByDescending { it.createdAt}
+            adapter = AdapterHome(sortedStories)
             binding.rvList.adapter = adapter
         }
+
+
 
         viewModel.isLoading.observe(viewLifecycleOwner) {
             binding.swipe.isRefreshing = it
@@ -63,11 +72,14 @@ class HomeFragment : Fragment() {
         }
 
 
+
         return root
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
 }

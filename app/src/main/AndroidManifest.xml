@@ -15,6 +15,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".view.story.AddStory"
+            android:exported="false" />
+        <activity
             android:name=".view.test.ScreeningTestActivity"
             android:exported="false" />
         <activity

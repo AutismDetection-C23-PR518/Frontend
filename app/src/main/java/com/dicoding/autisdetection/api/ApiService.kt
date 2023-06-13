@@ -22,5 +22,12 @@ interface ApiService {
     ): Call<List<StoryResponses>>
 
 
+    @POST("createpost")
+    fun postStories(
+        @Header("Authorization") token: String,
+        @Body storyRequest: StoryRequest
+    ): Call<StoryResponses>
+
+
 
 }

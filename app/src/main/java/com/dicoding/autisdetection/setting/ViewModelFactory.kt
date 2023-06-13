@@ -7,6 +7,7 @@ import com.dicoding.autisdetection.auth.LoginViewModel
 import com.dicoding.autisdetection.auth.RegisterViewModel
 import com.dicoding.autisdetection.view.main.ui.home.HomeViewModel
 import com.dicoding.autisdetection.view.main.ui.notifications.NotificationsViewModel
+import com.dicoding.autisdetection.view.story.StoryViewModel
 
 class ViewModelFactory(private val preference: SharedPreference, private val context: Context) : ViewModelProvider.Factory  {
 
@@ -25,6 +26,9 @@ class ViewModelFactory(private val preference: SharedPreference, private val con
             }
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(preference) as T
+            }
+            modelClass.isAssignableFrom(StoryViewModel::class.java) -> {
+                StoryViewModel(preference) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

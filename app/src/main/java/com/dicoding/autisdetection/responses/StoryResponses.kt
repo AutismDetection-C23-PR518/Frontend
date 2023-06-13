@@ -38,3 +38,9 @@ data class User(
     @SerializedName("email")
     val email: String
 )
+
+
+data class StoryRequest(
+    @SerializedName("post")
+    val post: String
+)
