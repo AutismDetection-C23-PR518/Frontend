@@ -2,10 +2,13 @@ package com.dicoding.autisdetection.responses
 
 import com.google.gson.annotations.SerializedName
 
+data class GetStoryResponse (
 
+    val stories: List<StoryResponse>
 
+)
 
-data class StoryResponses(
+data class StoryResponse(
     @SerializedName("id_post")
     val idPost: Int,
 
@@ -28,10 +31,10 @@ data class StoryResponses(
     val userIdUser: Int?,
 
     @SerializedName("user")
-    val user: User?
+    val user: Users?
 )
 
-data class User(
+data class Users(
     @SerializedName("name")
     val name: String,
 
@@ -42,8 +45,3 @@ data class User(
     val email: String
 )
 
-
-data class StoryRequest(
-    @SerializedName("post")
-    val post: String
-)

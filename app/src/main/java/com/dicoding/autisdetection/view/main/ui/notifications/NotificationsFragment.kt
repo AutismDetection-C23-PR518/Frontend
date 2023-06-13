@@ -19,9 +19,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.autisdetection.auth.LoginActivity
 import com.dicoding.autisdetection.auth.LoginViewModel
 import com.dicoding.autisdetection.databinding.FragmentNotificationsBinding
+import com.dicoding.autisdetection.responses.StoryResponses
 import com.dicoding.autisdetection.setting.SharedPreference
 import com.dicoding.autisdetection.setting.ViewModelFactory
 import com.dicoding.autisdetection.view.main.ui.dashboard.DashboardViewModel
+import com.dicoding.autisdetection.view.main.ui.home.AdapterHome
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
@@ -35,7 +37,7 @@ class NotificationsFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
     private lateinit var viewModel: NotificationsViewModel
-    private lateinit var adapter: AdapterPost
+    private lateinit var adapter: AdapterHome
     private var userid = 0
 
     override fun onCreateView(
@@ -51,8 +53,6 @@ class NotificationsFragment : Fragment() {
         val root: View = binding.root
 
         binding.rvList.layoutManager = LinearLayoutManager(requireContext())
-        adapter = AdapterPost(emptyList()) // Inisialisasi adapter dengan daftar kosong
-        binding.rvList.adapter = adapter
 
         binding.btnLogout.setOnClickListener {
             val dialog = MaterialAlertDialogBuilder(requireContext())
@@ -71,12 +71,16 @@ class NotificationsFragment : Fragment() {
         lifecycleScope.launch {
             userid = sharedPreferences.getId().firstOrNull()?.toIntOrNull() ?: 0
             viewModel.getUserId(userid)
-            viewModel.getPostId(userid)
+            viewModel.getStories(userid)
         }
 
-//        viewModel.getPost.observe(viewLifecycleOwner) { post ->
-//            adapter = AdapterPost(post)
-//        }
+        viewModel.story.observe(viewLifecycleOwner) { posts ->
+            val sortedStories = posts.sortedByDescending { it.createdAt}
+            adapter = AdapterHome(sortedStories)
+            binding.rvList.adapter = adapter
+        }
+
+
 
 
         viewModel.getUser.observe(viewLifecycleOwner) { user ->

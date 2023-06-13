@@ -39,7 +39,7 @@ interface ApiService {
     fun getPostId(
         @Header("Authorization") token: String,
         @Path("id") id: Int
-    ): Call<StoryResponse>
+    ): Call<List<StoryResponses>>
 
 
 
