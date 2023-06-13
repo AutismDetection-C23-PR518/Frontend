@@ -2,6 +2,7 @@ package com.dicoding.autisdetection.responses
 
 import com.google.gson.annotations.SerializedName
 
+
 data class StoryResponses(
     @SerializedName("id_post")
     val idPost: Int,

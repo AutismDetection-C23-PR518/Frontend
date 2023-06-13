@@ -46,8 +46,10 @@ class LoginViewModel(private val sharedPreferences: SharedPreference) : ViewMode
                     isSuccessful.value = true
                     viewModelScope.launch {
                         sharedPreferences.saveToken(loginResponse?.accessToken.toString())
+                        sharedPreferences.saveId(loginResponse?.result?.id.toString())
                     }
                     Log.d("LoginViewModel", "onResponse: ${response.body()?.accessToken}")
+                    Log.d("LoginViewModel", "onResponse: ${response.body()?.result?.id}")
                 } else {
                     _isLogged.value = false
                     isSuccessful.value = false

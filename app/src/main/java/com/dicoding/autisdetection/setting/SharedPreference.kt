@@ -34,6 +34,12 @@ class SharedPreference private constructor(private val dataStore: DataStore<Pref
         }
     }
 
+    fun getId(): Flow<String>{
+        return dataStore.data.map { preferences ->
+            preferences[KEY_ID] ?: ""
+        }
+    }
+
 
     fun getUser(): Flow<User>{
         return dataStore.data.map { preferences ->
@@ -57,6 +63,12 @@ class SharedPreference private constructor(private val dataStore: DataStore<Pref
     suspend fun saveToken(token: String){
         dataStore.edit { preferences ->
             preferences[KEY_TOKEN] = token
+        }
+    }
+
+    suspend fun saveId(id: String){
+        dataStore.edit { preferences ->
+            preferences[KEY_ID] = id
         }
     }
 

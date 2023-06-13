@@ -29,5 +29,18 @@ interface ApiService {
     ): Call<StoryResponses>
 
 
+    @GET("user/{id}")
+    fun getUser(
+        @Header("Authorization") token: String,
+        @Path("id") id: Int
+    ): Call<UserResponses>
+
+    @GET("post/{id}")
+    fun getPostId(
+        @Header("Authorization") token: String,
+        @Path("id") id: Int
+    ): Call<StoryResponse>
+
+
 
 }
