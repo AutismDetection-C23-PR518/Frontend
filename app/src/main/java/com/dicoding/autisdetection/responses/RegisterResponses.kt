@@ -7,6 +7,7 @@ data class RegisterResponses(
     @SerializedName("username") val username: String,
     @SerializedName("email") val email: String,
     @SerializedName("name") val name: String
+
 )
 
 data class RegisterRequest(
@@ -15,3 +16,18 @@ data class RegisterRequest(
     @SerializedName("email") val email: String,
     @SerializedName("password") val password: String
 )
+
+data class Updatereq(
+    @SerializedName("username")
+    val username: String,
+
+    @SerializedName("email")
+    val email: String,
+
+    @SerializedName("name")
+    val name: String,
+
+    @SerializedName("password")
+    val password: String
+
+    )

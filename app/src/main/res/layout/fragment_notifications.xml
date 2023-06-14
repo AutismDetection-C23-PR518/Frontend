@@ -54,16 +54,27 @@
                     android:text="username"
                     android:textSize="16sp" />
 
-                <Button
-                    android:id="@+id/btnLogout"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/TvUsername"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
                     android:layout_centerHorizontal="true"
-                    android:text="Logout" />
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnEditProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Edit Profile" />
+
+                    <Button
+                        android:id="@+id/btnLogout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="Logout" />
+
+                </LinearLayout>
 
                 <ProgressBar
                     android:id="@+id/loadings"
@@ -88,12 +99,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintTop_toBottomOf="@id/nestedScrollView"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/card" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

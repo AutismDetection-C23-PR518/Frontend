@@ -22,6 +22,7 @@ import com.dicoding.autisdetection.databinding.FragmentNotificationsBinding
 import com.dicoding.autisdetection.responses.StoryResponses
 import com.dicoding.autisdetection.setting.SharedPreference
 import com.dicoding.autisdetection.setting.ViewModelFactory
+import com.dicoding.autisdetection.view.main.edit.EditProfileActivity
 import com.dicoding.autisdetection.view.main.ui.dashboard.DashboardViewModel
 import com.dicoding.autisdetection.view.main.ui.home.AdapterHome
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -68,6 +69,11 @@ class NotificationsFragment : Fragment() {
             dialog.show()
         }
 
+        binding.btnEditProfile.setOnClickListener {
+            val intent = Intent(requireContext(), EditProfileActivity::class.java)
+            startActivity(intent)
+        }
+
         lifecycleScope.launch {
             userid = sharedPreferences.getId().firstOrNull()?.toIntOrNull() ?: 0
             viewModel.getUserId(userid)
@@ -79,8 +85,6 @@ class NotificationsFragment : Fragment() {
             adapter = AdapterHome(sortedStories)
             binding.rvList.adapter = adapter
         }
-
-
 
 
         viewModel.getUser.observe(viewLifecycleOwner) { user ->

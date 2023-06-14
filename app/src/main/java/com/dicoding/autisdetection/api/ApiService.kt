@@ -42,5 +42,13 @@ interface ApiService {
     ): Call<List<StoryResponses>>
 
 
+    @PATCH("updateprofile/{id}")
+    fun updateProfile(
+        @Header("Authorization") token: String,
+        @Path("id") id: Int,
+        @Body update: Updatereq
+    ): Call<Updatereq>
+
+
 
 }

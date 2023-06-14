@@ -1,16 +1,14 @@
 package com.dicoding.autisdetection.view.main.ui.notifications
 
 import android.util.Log
+import android.widget.Toast
 import androidx.datastore.preferences.protobuf.Api
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dicoding.autisdetection.api.ApiConfig
-import com.dicoding.autisdetection.responses.GetStoryResponse
-import com.dicoding.autisdetection.responses.StoryResponse
-import com.dicoding.autisdetection.responses.StoryResponses
-import com.dicoding.autisdetection.responses.UserResponses
+import com.dicoding.autisdetection.responses.*
 import com.dicoding.autisdetection.setting.SharedPreference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
@@ -29,6 +27,12 @@ class NotificationsViewModel(private val sharedPreferences: SharedPreference) : 
     private val getUserById = MutableLiveData<UserResponses>()
     val getUser: LiveData<UserResponses>
         get() = getUserById
+
+
+    private val isSuccessful: MutableLiveData<Boolean> = MutableLiveData()
+    fun isSuccessful(): LiveData<Boolean>{
+        return isSuccessful
+    }
 
 
     private val dataStory = MutableLiveData<List<StoryResponses>>()
@@ -72,6 +76,48 @@ class NotificationsViewModel(private val sharedPreferences: SharedPreference) : 
             }
         }
     }
+
+
+    fun updateUser(id: Int, name: String, username: String, email: String, password: String) {
+        viewModelScope.launch {
+            _isLoading.value = true
+            val token = sharedPreferences.getToken().first()
+            val update = Updatereq(name, username, email, password)
+            ApiConfig.getApiService().updateProfile("Bearer $token", id, update)
+                .enqueue(object : retrofit2.Callback<Updatereq> {
+                    override fun onResponse(
+                        call: Call<Updatereq>,
+                        response: Response<Updatereq>
+                    ) {
+                        _isLoading.value = false
+                        if (response.isSuccessful) {
+                            // Perubahan berhasil disimpan
+                            isSuccessful.value = true
+                            Log.d("Update", "onResponse: ${response.body()}")
+                            Log.d("Update", "onResponse: $token")
+                            // Refresh data pengguna setelah pembaruan
+                        } else {
+                            // Gagal menyimpan perubahan
+                            isSuccessful.value = false
+                            val errorMessage = response.errorBody()?.string()
+                            Log.d("Update", "onResponse (error): ${response.code()}")
+                            Log.d("Update", "onResponse (error): $errorMessage")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<Updatereq>, t: Throwable) {
+                        // Gagal melakukan permintaan jaringan
+                        _isLoading.value = false
+                        isSuccessful.value = false
+                    }
+                })
+        }
+    }
+
+
+
+
+
 
     fun getStories(id : Int) {
         viewModelScope.launch {
