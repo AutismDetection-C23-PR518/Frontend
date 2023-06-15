@@ -5,8 +5,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.dicoding.autisdetection.data.EntityResult
+import com.dicoding.autisdetection.data.ResultDatabase
 import com.dicoding.autisdetection.databinding.ActivityScreeningTestBinding
 import com.dicoding.autisdetection.ml.Model
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.Interpreter
 import org.tensorflow.lite.support.common.FileUtil
@@ -90,13 +95,14 @@ class ScreeningTestActivity : AppCompatActivity() {
             }
         }
 
-//        binding.submitButton.setOnClickListener {
+        binding.submitButton.setOnClickListener {
 //            val answer = getSelectedAnswer()
 //            if (answer != null) {
 //                answers.add(answer)
 //            }
 //            displayResult()
-//        }
+            saveResultToDatabase()
+        }
 
         binding.answerRadiogroup.setOnCheckedChangeListener { _, _ ->
             binding.nextButton.isEnabled = true
@@ -133,6 +139,27 @@ class ScreeningTestActivity : AppCompatActivity() {
             binding.answer5Radiobutton.id -> "E"
             else -> null
         }
+    }
+
+    private fun saveResultToDatabase() {
+        val result = processAnswers()
+        val resultText = if (result >= 0.5f) {
+            "Hasil skor tes menunjukkan bahwa terdapat ciri-ciri potensi ASD (Autistic Spectrum Disorder) pada anak Anda. Disarankan untuk berkonsultasi dengan dokter spesialis anak guna penanganan lebih lanjut.\n"
+        } else {
+            "Hasil skor tes menunjukkan bahwa tidak terdapat ciri-ciri potensi ASD (Autistic Spectrum Disorder) pada anak Anda."
+        }
+        val totalScore = (result * 10).toInt()
+
+        val entityResult = EntityResult(id = 1, result = resultText, skor = "Total Your Skor: $totalScore / 10")
+
+        val resultDao = ResultDatabase.getDatabase(this).resultDao()
+        GlobalScope.launch(Dispatchers.IO) {
+            resultDao.insertResult(entityResult)
+        }
+
+        Toast.makeText(this, "Result saved to database", Toast.LENGTH_SHORT).show()
+
+
     }
 
 

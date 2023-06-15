@@ -41,8 +41,8 @@ class EditProfileActivity : AppCompatActivity() {
 
         viewModel.getUser.observe(this){user ->
             binding.editTextName.setText(user.username)
-            binding.editTextEmail.setText(user.email)
-            binding.editTextUsername.setText(user.name)
+            binding.editTextEmail.setText(user.name)
+            binding.editTextUsername.setText(user.email)
         }
 
         lifecycleScope.launch {
@@ -55,7 +55,7 @@ class EditProfileActivity : AppCompatActivity() {
             val email = binding.editTextEmail.text.toString().trim()
             val username = binding.editTextUsername.text.toString().trim()
             val password = binding.editTextPassword.text.toString().trim()
-            viewModel.updateUser(userid, name, email, username, password)
+            viewModel.updateUser(userid, name, username, email , password)
             startActivity(Intent(this, HomeActivity::class.java))
             finish()
         }
