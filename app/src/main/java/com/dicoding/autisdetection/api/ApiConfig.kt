@@ -6,7 +6,7 @@ class ApiConfig {
 
     companion object {
 
-        private const val BASE_URL = "http://192.168.100.66:9000/api/v1/"
+        private const val BASE_URL = "https://backend-dot-autism-detection-387205.et.r.appspot.com/api/v1/"
 
         fun getApiService(): ApiService {
             val loggingInterceptor = if (BuildConfig.DEBUG) {
