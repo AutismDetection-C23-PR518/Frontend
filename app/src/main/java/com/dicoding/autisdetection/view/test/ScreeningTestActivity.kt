@@ -1,14 +1,19 @@
 package com.dicoding.autisdetection.view.test
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import com.dicoding.autisdetection.R
 import com.dicoding.autisdetection.data.EntityResult
 import com.dicoding.autisdetection.data.ResultDatabase
 import com.dicoding.autisdetection.databinding.ActivityScreeningTestBinding
 import com.dicoding.autisdetection.ml.Model
+import com.dicoding.autisdetection.view.main.HomeActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -95,14 +100,18 @@ class ScreeningTestActivity : AppCompatActivity() {
             }
         }
 
-        binding.submitButton.setOnClickListener {
-//            val answer = getSelectedAnswer()
-//            if (answer != null) {
-//                answers.add(answer)
-//            }
-//            displayResult()
+        binding.submitButton.setOnClickListener { view ->
             saveResultToDatabase()
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
         }
+
+
+
+
+
+
 
         binding.answerRadiogroup.setOnCheckedChangeListener { _, _ ->
             binding.nextButton.isEnabled = true
@@ -150,7 +159,7 @@ class ScreeningTestActivity : AppCompatActivity() {
         }
         val totalScore = (result * 10).toInt()
 
-        val entityResult = EntityResult(id = 1, result = resultText, skor = "Total Your Skor: $totalScore / 10")
+        val entityResult = EntityResult(result = resultText, skor = "Total Your Skor: $totalScore / 10")
 
         val resultDao = ResultDatabase.getDatabase(this).resultDao()
         GlobalScope.launch(Dispatchers.IO) {

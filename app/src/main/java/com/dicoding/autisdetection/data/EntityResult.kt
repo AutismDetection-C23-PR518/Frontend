@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class EntityResult (
-        @PrimaryKey
-        val id: Int,
+        @PrimaryKey(autoGenerate = true)
+        val id: Int = 0,
 
         @ColumnInfo(name = "result")
         val result: String,
